@@ -1,0 +1,1331 @@
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #18222c;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.92), transparent 32%),
+    linear-gradient(135deg, #f7f1e8 0%, #eef5f3 52%, #ddeaf1 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.appShell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sideNav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 84px;
+  height: 100vh;
+  padding: 28px 16px 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border-right: 1px solid rgba(152, 168, 181, 0.35);
+  box-shadow: 12px 0 28px rgba(47, 70, 89, 0.06);
+  overflow: hidden;
+  transition: width 0.18s ease;
+}
+
+.sideNav:hover {
+  width: 292px;
+}
+
+.sideNavItem {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  min-height: 72px;
+  padding: 0 8px;
+  border-radius: 22px;
+  background: transparent;
+  color: #203848;
+  text-align: left;
+  justify-content: center;
+}
+
+.sideNav:hover .sideNavItem {
+  justify-content: flex-start;
+}
+
+.sideNavItemActive {
+  background: transparent;
+  font-weight: 600;
+}
+
+.sideNavIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  color: #4a5a68;
+  flex-shrink: 0;
+}
+
+.sideNavItemActive .sideNavIcon {
+  background: rgba(212, 223, 230, 0.98);
+  box-shadow:
+    inset 0 0 0 1px rgba(108, 129, 143, 0.2),
+    0 8px 18px rgba(47, 70, 89, 0.08);
+}
+
+.sideNavLabel {
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    opacity 0.12s ease,
+    max-width 0.18s ease;
+}
+
+.sideNav:hover .sideNavLabel {
+  opacity: 1;
+  max-width: 220px;
+}
+
+.appContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.app {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 26px 20px 24px;
+}
+
+.goalsPage {
+  padding-top: 14px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #61717e;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.description {
+  max-width: 680px;
+  margin: 12px 0 0;
+  color: #4a5a68;
+}
+
+.header .description {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.monthSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 260px;
+  margin-top: 12px;
+}
+
+.monthSelector label {
+  color: #4a5a68;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.monthSelector select {
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid #c6d1db;
+  border-radius: 14px;
+  background: #fbfdff;
+  color: #203848;
+}
+
+.monthlyTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.monthlyTitleRow h1 {
+  margin: 0;
+}
+
+.monthlyHelp {
+  position: relative;
+}
+
+.monthlyHelp summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #c6d1db;
+  border-radius: 999px;
+  background: #fbfdff;
+  color: #203848;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.monthlyHelp summary::-webkit-details-marker {
+  display: none;
+}
+
+.monthlyHelpTooltip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 2;
+  width: min(360px, calc(100vw - 60px));
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #203848;
+  color: #f6f9fb;
+  box-shadow: 0 14px 30px rgba(32, 56, 72, 0.24);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 460px));
+  gap: 20px;
+  justify-content: center;
+}
+
+.monthlyCard {
+  margin-bottom: 16px;
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 18px 40px rgba(47, 70, 89, 0.12);
+}
+
+.monthlyCardHeader {
+  margin-bottom: 12px;
+}
+
+.monthlyCardTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.monthlyCardHeader h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #203848;
+}
+
+.monthlyStatusBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #edf3f7;
+  color: #425768;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.goalsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mountainScene {
+  position: relative;
+  min-height: 422px;
+  padding: 12px 18px 12px;
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(214, 236, 247, 0.95) 0%, rgba(244, 249, 252, 0.95) 100%);
+  box-shadow: 0 18px 40px rgba(47, 70, 89, 0.12);
+  overflow: visible;
+}
+
+.mountainBackdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0, rgba(255, 255, 255, 0.35) 12px, transparent 12px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0, rgba(255, 255, 255, 0.2) 12px, transparent 12px);
+  background-size: 12px 12px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.mountainGuides {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: min(920px, calc(100% - 12px));
+  height: 360px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.mountainGuide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(32, 56, 72, 0.58);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.mountainGuide::after {
+  content: "";
+  flex: 1;
+  border-top: 1px dashed rgba(32, 56, 72, 0.24);
+}
+
+.mountainGuideTop {
+  top: 0;
+}
+
+.mountainGuideMiddle {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mountainGuideBase {
+  bottom: 0;
+}
+
+.mountainShape {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: min(920px, calc(100% - 12px));
+  height: 360px;
+  transform: translateX(-50%);
+  clip-path: polygon(6% 100%, 18% 76%, 30% 54%, 41% 34%, 50% 0, 61% 30%, 72% 50%, 84% 74%, 96% 100%);
+  background:
+    linear-gradient(180deg, #8ca4ad 0%, #758d97 38%, #637982 38%, #637982 100%);
+  border: 4px solid #536973;
+  box-shadow: inset 0 10px 0 rgba(255, 255, 255, 0.18);
+  z-index: 1;
+}
+
+.mountainShape::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 108px;
+  height: 52px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.75);
+  clip-path: polygon(0 100%, 18% 46%, 38% 58%, 58% 18%, 78% 38%, 100% 0, 100% 100%);
+}
+
+.mountainTrail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.mountainTrailBase {
+  fill: none;
+  stroke: rgba(92, 73, 54, 0.72);
+  stroke-width: 5.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mountainTrailLine {
+  fill: none;
+  stroke: rgba(232, 214, 184, 0.95);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1.5 3.2;
+}
+
+.goalMarkerLayer {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: min(920px, calc(100% - 12px));
+  height: 360px;
+  transform: translateX(-50%);
+  z-index: 3;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.goalMarkerSlot {
+  position: absolute;
+  transform: translate(-50%, 0);
+  width: 34px;
+  height: 34px;
+  z-index: 4;
+}
+
+.goalMarker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border: 3px solid transparent;
+  box-shadow: 0 8px 16px rgba(47, 70, 89, 0.18);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.goalMarker span {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #203848;
+}
+
+.goalMarkerBase {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 8px;
+  background: rgba(32, 56, 72, 0.24);
+  border-radius: 999px;
+}
+
+.goalTooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  min-width: 170px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(32, 56, 72, 0.94);
+  color: #f6f9fb;
+  box-shadow: 0 16px 30px rgba(32, 56, 72, 0.24);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.goalTooltip strong,
+.goalTooltip span {
+  display: block;
+}
+
+.goalTooltip span {
+  margin-top: 4px;
+  color: rgba(246, 249, 251, 0.86);
+  font-size: 0.85rem;
+}
+
+.goalsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.goalCard {
+  padding: 10px 12px;
+  border-radius: 18px;
+  border: 1px solid transparent;
+  box-shadow: 0 18px 40px rgba(47, 70, 89, 0.12);
+}
+
+.goalCardHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 5px;
+}
+
+.goalCardHeader h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.goalCardHeader strong {
+  font-size: 1.05rem;
+  color: #203848;
+}
+
+.goalStats {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 5px;
+  color: #4f6170;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.goalMeta {
+  margin-bottom: 5px;
+}
+
+.goalMeta summary {
+  color: #4f6170;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.goalMeta span {
+  display: block;
+  margin-top: 6px;
+  color: #667987;
+  font-size: 0.85rem;
+}
+
+.goalEditButton {
+  width: 100%;
+  min-height: 36px;
+  margin-bottom: 5px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #203848;
+  font-weight: 600;
+}
+
+.goalEditRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.goalEditRow input {
+  width: 100%;
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #c6d1db;
+  border-radius: 12px;
+  background: #fbfdff;
+}
+
+.goalEditRow .smallButton,
+.goalEditRow .secondaryButton {
+  min-width: 0;
+  height: 36px;
+}
+
+.goalProgressBar {
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  overflow: hidden;
+}
+
+.goalProgressFill {
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(32, 56, 72, 0.78);
+}
+
+.monthlyBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(300px, 0.9fr);
+  gap: 14px;
+}
+
+.monthlyBody h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.monthlySection {
+  min-width: 0;
+}
+
+.monthlyPaymentsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 18px;
+  background: #f7fafc;
+  border: 1px solid rgba(152, 168, 181, 0.18);
+}
+
+.monthlyPaymentsHeader h3 {
+  margin-bottom: 4px;
+}
+
+.monthlyPaymentsHeader p {
+  margin: 0;
+  color: #667987;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.monthlyList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.monthlyItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #f5f9fb;
+  border: 1px solid transparent;
+}
+
+.monthlyItemMuted {
+  filter: saturate(0.75);
+}
+
+.monthlyItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.monthlyItem span {
+  color: #667987;
+  font-size: 0.92rem;
+}
+
+.monthlyStatus {
+  margin-top: 4px;
+  font-size: 0.84rem;
+}
+
+.monthlyEmpty {
+  margin: 0;
+  color: #667987;
+  font-size: 0.95rem;
+}
+
+.monthlyEmptyState {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  min-height: 138px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #eef4f7;
+  border: 1px dashed rgba(152, 168, 181, 0.45);
+}
+
+.monthlyEmptyState strong {
+  color: #203848;
+  font-size: 0.98rem;
+}
+
+.monthlyEmptyState p {
+  margin: 0;
+  color: #667987;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.paymentItem,
+.monthInfoItem {
+  justify-content: flex-start;
+}
+
+.balanceItem {
+  align-items: flex-start;
+}
+
+.balanceCard {
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 40px rgba(47, 70, 89, 0.1);
+}
+
+.balanceCardHeader {
+  margin-bottom: 12px;
+}
+
+.balanceTitleRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 220px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  min-height: 48px;
+}
+
+.balanceTitleSlot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.balanceCenterSlot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+}
+
+.balanceCardHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.balanceControls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 48px;
+}
+
+.balanceToggle {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: #eef3f6;
+}
+
+.balanceToggleButton {
+  min-width: 96px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: transparent;
+  color: #4f6170;
+  font-weight: 600;
+}
+
+.balanceToggleButton.active {
+  background: #203848;
+  color: #f6f9fb;
+}
+
+.balanceMonthSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.balanceMonthSelector label {
+  color: #4a5a68;
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.balanceMonthSelector select {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #c6d1db;
+  border-radius: 14px;
+  background: #fbfdff;
+  color: #203848;
+}
+
+.balanceList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.balanceListItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #f7f9fb;
+  border: 1px solid rgba(152, 168, 181, 0.22);
+}
+
+.balanceListItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.balanceListItem span {
+  color: #667987;
+  font-size: 0.9rem;
+}
+
+.balancePositive {
+  color: #1f6a42;
+}
+
+.balanceNegative {
+  color: #9e3d2d;
+}
+
+.balanceNeutral {
+  color: #4f6170;
+}
+
+.monthlyPerson-fran {
+  background: #e7f1ff;
+  border-color: #4f7fc7;
+}
+
+.monthlyPerson-adolfo {
+  background: #e8f4e8;
+  border-color: #4b8a55;
+}
+
+.monthlyPerson-nuria {
+  background: #fdeaf4;
+  border-color: #c06b93;
+}
+
+.monthlyPerson-carmen {
+  background: #fff0e2;
+  border-color: #cb7a34;
+}
+
+.trendLoss {
+  color: #1f6a42;
+}
+
+.trendGain {
+  color: #9e3d2d;
+}
+
+.trendSame {
+  color: #4f6170;
+}
+
+.trendLate {
+  color: #6a7580;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 11px 13px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid transparent;
+  box-shadow: 0 18px 40px rgba(47, 70, 89, 0.12);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 11px;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 1.53rem;
+  line-height: 1.1;
+}
+
+.card p {
+  margin: 0;
+  color: #203848;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: right;
+}
+
+.card p span {
+  color: #4f6170;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 136px) 48px;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls button {
+  height: 46px;
+  border-radius: 15px;
+  background: #d8e9ef;
+  color: #123040;
+  font-size: 1.42rem;
+}
+
+.controls input {
+  width: 100%;
+  max-width: 136px;
+  height: 46px;
+  padding: 0 13px;
+  border: 1px solid #c6d1db;
+  border-radius: 15px;
+  background: #fbfdff;
+  justify-self: center;
+}
+
+.dateInput {
+  width: 100%;
+  max-width: 204px;
+  height: 41px;
+  padding: 0 11px;
+  border: 1px solid #c6d1db;
+  border-radius: 14px;
+  background: #fbfdff;
+  color: #203848;
+  align-self: center;
+}
+
+.saveButton {
+  width: 100%;
+  max-width: 204px;
+  height: 45px;
+  border-radius: 16px;
+  background: #203848;
+  color: #f6f9fb;
+  font-weight: 600;
+  align-self: center;
+}
+
+.detailButton {
+  width: 100%;
+  max-width: 204px;
+  height: 41px;
+  border-radius: 16px;
+  background: #e7eef2;
+  color: #203848;
+  font-weight: 600;
+  align-self: center;
+}
+
+.chart,
+.history {
+  padding-top: 4px;
+}
+
+.chart h3,
+.history h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.chartEmpty,
+.historyEmpty {
+  color: #667987;
+  font-size: 0.95rem;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 88px;
+  display: block;
+  border-radius: 14px;
+  background: #f5f9fb;
+}
+
+.detailHeader {
+  margin-bottom: 16px;
+}
+
+.goalsPage .detailHeader {
+  margin-bottom: 8px;
+}
+
+.goalsPage .detailHeader h1 {
+  margin: 0 0 4px;
+}
+
+.detailPersonName {
+  color: #203848;
+}
+
+.currentWeightCard {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 40px rgba(47, 70, 89, 0.12);
+}
+
+.currentWeightCard span {
+  color: #667987;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.currentWeightCard strong {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1;
+  color: #203848;
+}
+
+.detailCard {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid transparent;
+  box-shadow: 0 18px 40px rgba(47, 70, 89, 0.12);
+}
+
+.backButton {
+  min-width: 96px;
+  height: 40px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: #e7eef2;
+  color: #203848;
+  font-weight: 600;
+}
+
+.detailChartSvg {
+  width: 100%;
+  height: 140px;
+  display: block;
+  border-radius: 16px;
+  background: #f5f9fb;
+}
+
+.chartWrapper {
+  position: relative;
+}
+
+.chartAxis {
+  stroke: #c6d1db;
+  stroke-width: 1;
+}
+
+.chartLine {
+  stroke: #203848;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.chartGuide {
+  stroke: #8fa3b2;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.chartHighlight {
+  fill: #203848;
+  stroke: #f5f9fb;
+  stroke-width: 2;
+}
+
+.chartHoverArea {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.chartTooltip {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  min-width: 150px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #203848;
+  color: #f6f9fb;
+  box-shadow: 0 14px 30px rgba(32, 56, 72, 0.24);
+  pointer-events: none;
+}
+
+.chartTooltip strong,
+.chartTooltip span {
+  display: block;
+}
+
+.chartTooltip span {
+  margin-top: 4px;
+  color: rgba(246, 249, 251, 0.82);
+  font-size: 0.85rem;
+}
+
+.historyList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.detailHistoryList {
+  max-height: 420px;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f5f9fb;
+}
+
+.detailHistoryItem {
+  align-items: flex-start;
+}
+
+.historyItem div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.historyActions {
+  display: flex;
+  gap: 8px;
+}
+
+.editRow {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.editRow input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #c6d1db;
+  border-radius: 12px;
+  background: #fbfdff;
+}
+
+.historyItem span {
+  color: #667987;
+  font-size: 0.9rem;
+}
+
+.smallButton {
+  min-width: 78px;
+  height: 40px;
+  border-radius: 12px;
+  background: #203848;
+  color: #f6f9fb;
+}
+
+.secondaryButton {
+  background: #e7eef2;
+  color: #203848;
+}
+
+.deleteButton {
+  min-width: 78px;
+  height: 40px;
+  border-radius: 12px;
+  background: #e7eef2;
+  color: #203848;
+}
+
+.personTheme-fran {
+  background: #e7f1ff;
+  border-color: #4f7fc7;
+}
+
+.personTheme-adolfo {
+  background: #e8f4e8;
+  border-color: #4b8a55;
+}
+
+.personTheme-nuria {
+  background: #fdeaf4;
+  border-color: #c06b93;
+}
+
+.personTheme-carmen {
+  background: #fff0e2;
+  border-color: #cb7a34;
+}
+
+.detailHeader.personTheme {
+  padding: 24px 28px;
+  border-radius: 24px;
+  border: 1px solid transparent;
+  box-shadow: 0 18px 40px rgba(47, 70, 89, 0.08);
+}
+
+.currentWeightCard.personTheme {
+  box-shadow: none;
+}
+
+.personTheme .detailPersonName,
+.personTheme.currentWeightCard strong,
+.personTheme h2 {
+  color: #203848;
+}
+
+@media (max-width: 760px) {
+  .appShell {
+    flex-direction: column;
+  }
+
+  .sideNav,
+  .sideNav:hover {
+    position: static;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    padding: 14px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(152, 168, 181, 0.35);
+  }
+
+  .sideNavItem {
+    justify-content: center;
+    padding: 0 10px;
+  }
+
+  .sideNavLabel,
+  .sideNav:hover .sideNavLabel {
+    display: none;
+  }
+
+  .app {
+    padding: 20px 16px 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mountainScene {
+    min-height: 340px;
+    padding: 16px;
+  }
+
+  .mountainGuides {
+    bottom: 18px;
+    width: calc(100% - 16px);
+    height: 240px;
+  }
+
+  .mountainShape {
+    bottom: 18px;
+    width: calc(100% - 16px);
+    height: 240px;
+  }
+
+  .goalMarkerLayer {
+    bottom: 18px;
+    width: calc(100% - 16px);
+    height: 240px;
+  }
+
+  .goalsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .monthlyBody {
+    grid-template-columns: 1fr;
+  }
+
+  .monthlyTitleRow {
+    align-items: flex-start;
+  }
+
+  .monthlyHelpTooltip {
+    width: min(300px, calc(100vw - 52px));
+  }
+
+  .balanceTitleRow {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .balanceControls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .balanceCenterSlot,
+  .balanceControls {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .goalsGrid {
+    grid-template-columns: 1fr;
+  }
+}
